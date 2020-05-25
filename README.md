@@ -73,3 +73,7 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/tr
 docker-compose run app yarn add redux react-redux redux-thunk redux-devtools
 ```
 
+* [ducks-modular-redux][ducks_modular_redux]
+
+[ducks_modular_redux]: https://github.com/erikras/ducks-modular-redux
+
