@@ -14,6 +14,7 @@ const generateStore = () => {
     rootReducer,
     composeEnhancers(applyMiddleware(thunk))
   );
+  // consiguiendo los personajes por primera vez.
   getCharactersAction()(store.dispatch, store.getState);
   return store;
 }
