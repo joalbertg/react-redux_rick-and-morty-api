@@ -7,7 +7,7 @@ import App from './App';
 import './index.css';
 import 'font-awesome/css/font-awesome.css';
 import * as serviceWorker from './serviceWorker';
-import generateStore from './redux/store';
+import { generateStore } from './redux';
 
 const store = generateStore();
 

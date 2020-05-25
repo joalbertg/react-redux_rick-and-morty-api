@@ -14,7 +14,7 @@ const reducer = (state = initData, action) => {
   }
 }
 
-export default reducer;
-
 // action (action creator)
+
+export default reducer;
 
