@@ -6,13 +6,15 @@ const initData = {
 const LOGIN = 'LOGIN';
 
 // reducers
-export default const reducer = (state = initData, action) => {
+const reducer = (state = initData, action) => {
   switch(action.type) {
     case LOGIN:
     default:
       return state;
   }
 }
+
+export default reducer;
 
 // action (action creator)
 

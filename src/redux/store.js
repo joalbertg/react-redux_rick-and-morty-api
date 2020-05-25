@@ -8,11 +8,13 @@ const rootReducer = combineReducers({
   user: userReducer
 });
 
-export default const generateStore = () => {
+const generateStore = () => {
   const store = createStore(
     rootReducer,
     composeEnhancers(applyMiddleware(thunk))
   );
   return store;
 }
+
+export default generateStore;
 
