@@ -2,7 +2,7 @@ import axios from 'axios';
 
 // constants
 const initData = {
-  fetching: false;
+  fetching: false,
   array: [],
   current: {}
 }
