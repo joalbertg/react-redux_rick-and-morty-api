@@ -3,5 +3,9 @@ export {
   getCharactersAction,
   removeCharacterAction,
 } from './charsDuck';
-export { default as userReducer } from './userDuck';
+
+export {
+  default as userReducer,
+  doGoogleLoginAction
+} from './userDuck';
 
