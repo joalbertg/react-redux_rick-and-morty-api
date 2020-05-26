@@ -6,13 +6,9 @@ import Card from '../card/Card';
 import styles from './home.module.css';
 
 function Home({ chars, removeCharacterAction, addToFavoritesAction }) {
-    const nextCharacter = () => {
-      removeCharacterAction()
-    }
+    const nextCharacter = () => removeCharacterAction();
 
-    const addFavorites = () => {
-      addToFavoritesAction()
-    }
+    const addFavorites = () => addToFavoritesAction();
 
     const renderCharacter = () => {
       let char = chars[0]
