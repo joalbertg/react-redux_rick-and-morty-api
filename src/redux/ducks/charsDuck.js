@@ -12,6 +12,8 @@ const GET_CHARACTERS = 'GET_CHARACTERS';
 const GET_CHARACTERS_SUCCESS = 'GET_CHARACTERS_SUCCESS';
 const GET_CHARACTERS_ERROR = 'GET_CHARACTERS_ERROR';
 
+const REMOVE_CHARACTER = 'REMOVE_CHARACTER';
+
 // reducer
 const reducer = (state=initData, action) => {
   switch(action.type) {
@@ -21,6 +23,8 @@ const reducer = (state=initData, action) => {
       return { ...state, array: action.payload, fetching: false }
     case GET_CHARACTERS_ERROR:
       return { ...state, fetching: false, error: action.payload }
+    case REMOVE_CHARACTER:
+      return { ...state, fetching: false, array: action.payload }
     default:
       return state;
   }
@@ -46,6 +50,20 @@ export const getCharactersAction = () => (dispatch, getState) => {
       });
       console.log(error);
     });
+}
+
+export const removeCharacterAction = () => (dispatch, getState) => {
+  dispatch({
+    type: GET_CHARACTERS
+  });
+
+  const { array } = getState().characters;
+  array.shift();
+
+  dispatch({
+    type: REMOVE_CHARACTER,
+    payload: [...array]
+  });
 }
 
 export default reducer;
