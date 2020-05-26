@@ -1,5 +1,6 @@
 import firebase from 'firebase/app';
 import 'firebase/auth';
+import 'firebase/firestore';
 
 const firebaseConfig = {
   apiKey: "AIzaSyAS28uwo_yfReZ90q4KSWXQtn86q3-bzVU",
@@ -14,6 +15,7 @@ const firebaseConfig = {
 
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore().collection('favorites');
 
 export const loginWithGoogle = () => {
   const provider = new firebase.auth.GoogleAuthProvider();
@@ -23,6 +25,10 @@ export const loginWithGoogle = () => {
     .then(snap => snap.user)
     .catch(console.log);
 }
+
+export const updateDB = (array, uid) => (
+  db.doc(uid).set({array})
+);
 
 export const signOutGoogle = () => {
   firebase.auth().signOut();
