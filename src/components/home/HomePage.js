@@ -1,19 +1,23 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { removeCharacterAction } from '../../redux/ducks';
+import { removeCharacterAction, addToFavoritesAction } from '../../redux/ducks';
 import Card from '../card/Card';
 import styles from './home.module.css';
 
-function Home({ chars, removeCharacterAction }) {
-    const renderCharacter = () => {
-      let char = chars[0]
-      return <Card leftClick={nextCharacter} {...char} />
-    };
-
+function Home({ chars, removeCharacterAction, addToFavoritesAction }) {
     const nextCharacter = () => {
       removeCharacterAction()
     }
+
+    const addFavorites = () => {
+      addToFavoritesAction()
+    }
+
+    const renderCharacter = () => {
+      let char = chars[0]
+      return <Card leftClick={nextCharacter} rightClick={addFavorites} {...char} />
+    };
 
     return (
       <div className={styles.container}>
@@ -22,7 +26,7 @@ function Home({ chars, removeCharacterAction }) {
           { renderCharacter() }
         </div>
       </div>
-    )
+    );
 }
 
 const mapStateToProps = state => {
@@ -31,5 +35,5 @@ const mapStateToProps = state => {
   }
 };
 
-export default connect(mapStateToProps, { removeCharacterAction })(Home);
+export default connect(mapStateToProps, { removeCharacterAction, addToFavoritesAction })(Home);
 

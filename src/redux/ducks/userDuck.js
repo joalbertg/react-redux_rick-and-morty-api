@@ -28,13 +28,11 @@ const reducer = (state = initData, action) => {
 }
 
 // aux
-
 const saveStorage = storage => {
   localStorage.storage = JSON.stringify(storage);
 }
 
 // action (action creator)
-
 export const restoreSessionAction = () => dispatch => {
   let storage = localStorage.getItem('storage');
   storage = JSON.parse(storage);
