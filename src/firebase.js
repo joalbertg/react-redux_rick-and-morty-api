@@ -24,3 +24,7 @@ export const loginWithGoogle = () => {
     .catch(console.log);
 }
 
+export const signOutGoogle = () => {
+  firebase.auth().signOut();
+}
+
