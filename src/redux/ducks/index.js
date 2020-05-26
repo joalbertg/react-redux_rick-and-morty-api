@@ -6,6 +6,7 @@ export {
 
 export {
   default as userReducer,
-  doGoogleLoginAction
+  doGoogleLoginAction,
+  restoreSessionAction
 } from './userDuck';
 

@@ -1,7 +1,12 @@
 import { createStore, combineReducers, compose, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 
-import { userReducer, charsReducer, getCharactersAction } from './ducks';
+import {
+  userReducer,
+  charsReducer,
+  getCharactersAction,
+  restoreSessionAction
+} from './ducks';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const rootReducer = combineReducers({
@@ -16,6 +21,7 @@ const generateStore = () => {
   );
   // consiguiendo los personajes por primera vez.
   getCharactersAction()(store.dispatch, store.getState);
+  restoreSessionAction()(store.dispatch);
   return store;
 }
 
