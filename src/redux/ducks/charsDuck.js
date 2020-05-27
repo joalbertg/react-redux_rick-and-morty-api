@@ -78,9 +78,14 @@ const reducer = (state=initData, action) => {
 
 export const getCharactersAction = () => (dispatch, getState) => {
   const query = gql`
-    {
-      characters {
-        results {
+    query ($page:Int){
+      characters(page:$page){
+        info{
+          pages
+          next
+          prev
+        }
+        results{
           name
           image
         }
@@ -93,7 +98,8 @@ export const getCharactersAction = () => (dispatch, getState) => {
   });
 
   return client.query({
-    query
+    query,
+    variables: { page: 10 }
   })
   .then(({ data, error }) => {
     if (error) {
