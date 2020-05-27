@@ -10,7 +10,8 @@ const initData = {
   fetching: false,
   array: [],
   current: {},
-  favorites: []
+  favorites: [],
+  nextPage: 1
 }
 // eslint-disable-next-line
 //const URL = 'https://rickandmortyapi.com/api/character';
@@ -18,6 +19,8 @@ const initData = {
 const client = new ApolloClient({
   uri: 'https://rickandmortyapi.com/graphql'
 });
+
+const UPDATE_PAGE = 'UPDATE_PAGE';
 
 const GET_CHARACTERS = 'GET_CHARACTERS';
 const GET_CHARACTERS_SUCCESS = 'GET_CHARACTERS_SUCCESS';
@@ -49,6 +52,8 @@ const reducer = (state=initData, action) => {
       return { ...state, fetching: false, favorites: action.payload }
     case GET_FAVORITES_ERROR:
       return { ...state, fetching: false, error: action.payload }
+    case UPDATE_PAGE:
+      return { ...state, nextPage: action.payload }
     default:
       return state;
   }
@@ -97,9 +102,11 @@ export const getCharactersAction = () => (dispatch, getState) => {
     type: GET_CHARACTERS
   });
 
+  let { nextPage } = getState().characters
+
   return client.query({
     query,
-    variables: { page: 10 }
+    variables: { page: nextPage }
   })
   .then(({ data, error }) => {
     if (error) {
@@ -114,6 +121,11 @@ export const getCharactersAction = () => (dispatch, getState) => {
       type: GET_CHARACTERS_SUCCESS,
       payload: data.characters.results
     });
+
+    dispatch({
+      type: UPDATE_PAGE,
+      payload: data.characters.info.next ? data.characters.info.next : 1
+    });
   });
 }
 
@@ -125,6 +137,11 @@ export const removeCharacterAction = () => (dispatch, getState) => {
 
   const { array } = getState().characters;
   array.shift();
+
+  if (!array.length) {
+    getCharactersAction()(dispatch, getState);
+    return
+  }
 
   dispatch({
     type: REMOVE_CHARACTER,
