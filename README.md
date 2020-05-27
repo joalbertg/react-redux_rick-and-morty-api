@@ -72,6 +72,7 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/tr
 ```shell
 docker-compose run app yarn add redux react-redux redux-thunk redux-devtools
 docker-compose run app firebase
+docker-compose run app yarn add react-apollo apollo-boost graphql
 ```
 
 * [ducks-modular-redux][ducks_modular_redux]

@@ -12,7 +12,13 @@ function Home({ chars, removeCharacterAction, addToFavoritesAction }) {
 
     const renderCharacter = () => {
       let char = chars[0]
-      return <Card leftClick={nextCharacter} rightClick={addFavorites} {...char} />
+      return (
+        <Card
+          leftClick={nextCharacter}
+          rightClick={addFavorites}
+          {...char}
+        />
+      );
     };
 
     return (
