@@ -30,6 +30,16 @@ export const updateDB = (array, uid) => (
   db.doc(uid).set({array})
 );
 
+export const getFavorites = uid => {
+  return db.doc(uid)
+           .get()
+           .then(snap => {
+             if (snap.exists) {
+               return snap.data().array;
+             } else { return [] }
+           });
+}
+
 export const signOutGoogle = () => {
   firebase.auth().signOut();
 }

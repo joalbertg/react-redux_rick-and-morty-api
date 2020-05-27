@@ -1,4 +1,6 @@
 import { loginWithGoogle, signOutGoogle } from '../../firebase.js';
+import { retrieveFavorites } from '../ducks';
+import { saveStorage } from '../../helpers';
 
 // constants
 const initData = {
@@ -25,11 +27,6 @@ const reducer = (state = initData, action) => {
     default:
       return state;
   }
-}
-
-// aux
-const saveStorage = storage => {
-  localStorage.storage = JSON.stringify(storage);
 }
 
 // action (action creator)
@@ -61,6 +58,7 @@ export const doGoogleLoginAction = () => (dispatch, getState) => {
           photoURL: user.photoURL
         }
       });
+      retrieveFavorites()(dispatch, getState);
       saveStorage(getState());
     }).catch(error => {
       dispatch({

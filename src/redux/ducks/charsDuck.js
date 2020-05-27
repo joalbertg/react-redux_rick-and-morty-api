@@ -1,6 +1,7 @@
 import axios from 'axios';
 
-import { updateDB } from '../../firebase';
+import { updateDB, getFavorites } from '../../firebase';
+import { saveStorage } from '../../helpers';
 
 // constants
 const initData = {
@@ -18,6 +19,10 @@ const GET_CHARACTERS_ERROR = 'GET_CHARACTERS_ERROR';
 const REMOVE_CHARACTER = 'REMOVE_CHARACTER';
 const ADD_TO_FAVORITES = 'ADD_TO_FAVORITES';
 
+const GET_FAVORITES = 'GET_FAVORITES';
+const GET_FAVORITES_SUCCESS = 'GET_FAVORITES_SUCCESS';
+const GET_FAVORITES_ERROR = 'GET_FAVORITES_ERROR';
+
 // reducer
 const reducer = (state=initData, action) => {
   switch(action.type) {
@@ -31,6 +36,12 @@ const reducer = (state=initData, action) => {
       return { ...state, fetching: false, array: action.payload }
     case ADD_TO_FAVORITES:
       return { ...state, fetching: false,  ...action.payload }
+    case GET_FAVORITES:
+      return { ...state, fetching: true }
+    case GET_FAVORITES_SUCCESS:
+      return { ...state, fetching: false, favorites: action.payload }
+    case GET_FAVORITES_ERROR:
+      return { ...state, fetching: false, error: action.payload }
     default:
       return state;
   }
@@ -87,6 +98,43 @@ export const addToFavoritesAction = () => (dispatch, getState) => {
     type: ADD_TO_FAVORITES,
     payload: { array: [...array], favorites: [...favorites] }
   });
+
+  saveStorage(getState());
+}
+
+export const retrieveFavorites = () => (dispatch, getState) => {
+  dispatch({
+    type: GET_FAVORITES
+  });
+
+  const { uid } = getState().user;
+  return getFavorites(uid)
+           .then(array => {
+             dispatch({
+               type: GET_FAVORITES_SUCCESS,
+               payload: [...array]
+             });
+             saveStorage(getState());
+           })
+           .catch(error => {
+             dispatch({
+               type: GET_FAVORITES_ERROR,
+               payload: error.message
+             });
+             console.log(error);
+           });
+}
+
+export const restoreFavoritesAction = () => dispatch => {
+  let storage = localStorage.getItem('storage');
+  storage = JSON.parse(storage);
+
+  if (storage && storage.characters) {
+    dispatch({
+      type: GET_FAVORITES_SUCCESS,
+      payload: [...storage.characters.favorites]
+    });
+  }
 }
 
 export default reducer;

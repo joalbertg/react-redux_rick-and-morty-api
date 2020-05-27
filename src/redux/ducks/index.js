@@ -2,7 +2,9 @@ export {
   default as charsReducer,
   getCharactersAction,
   removeCharacterAction,
-  addToFavoritesAction
+  addToFavoritesAction,
+  retrieveFavorites,
+  restoreFavoritesAction
 } from './charsDuck';
 
 export {
