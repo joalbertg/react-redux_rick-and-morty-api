@@ -1,4 +1,6 @@
-import axios from 'axios';
+// eslint-disable-next-line
+//import axios from 'axios';
+import ApolloClient, { gql } from 'apollo-boost';
 
 import { updateDB, getFavorites } from '../../firebase';
 import { saveStorage } from '../../helpers';
@@ -10,7 +12,12 @@ const initData = {
   current: {},
   favorites: []
 }
-const URL = 'https://rickandmortyapi.com/api/character';
+// eslint-disable-next-line
+//const URL = 'https://rickandmortyapi.com/api/character';
+
+const client = new ApolloClient({
+  uri: 'https://rickandmortyapi.com/graphql'
+});
 
 const GET_CHARACTERS = 'GET_CHARACTERS';
 const GET_CHARACTERS_SUCCESS = 'GET_CHARACTERS_SUCCESS';
@@ -48,26 +55,62 @@ const reducer = (state=initData, action) => {
 }
 
 // actions (thunks)
+/*export const getCharactersAction = () => (dispatch, getState) => {*/
+  //dispatch({
+    //type: GET_CHARACTERS
+  //});
+
+  //return axios.get(URL)
+    //.then(res =>{
+      //dispatch({
+        //type: GET_CHARACTERS_SUCCESS,
+        //payload: res.data.results
+      //});
+    //})
+    //.catch(error => {
+      //dispatch({
+        //type: GET_CHARACTERS_ERROR,
+        //payload: error.response.message
+      //});
+      //console.log(error);
+    //});
+/*}*/
+
 export const getCharactersAction = () => (dispatch, getState) => {
+  const query = gql`
+    {
+      characters {
+        results {
+          name
+          image
+        }
+      }
+    }
+  `;
+
   dispatch({
     type: GET_CHARACTERS
   });
 
-  return axios.get(URL)
-    .then(res =>{
-      dispatch({
-        type: GET_CHARACTERS_SUCCESS,
-        payload: res.data.results
-      });
-    })
-    .catch(error => {
+  return client.query({
+    query
+  })
+  .then(({ data, error }) => {
+    if (error) {
       dispatch({
         type: GET_CHARACTERS_ERROR,
         payload: error.response.message
       });
-      console.log(error);
+      return
+    }
+
+    dispatch({
+      type: GET_CHARACTERS_SUCCESS,
+      payload: data.characters.results
     });
+  });
 }
+
 
 export const removeCharacterAction = () => (dispatch, getState) => {
   dispatch({
