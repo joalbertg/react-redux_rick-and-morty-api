@@ -1,9 +1,10 @@
 import React from 'react'
-import styles from './card.module.css'
 import FontAwesome from 'react-fontawesome'
 import PropTypes from 'prop-types'
 
-let rick = "https://rickandmortyapi.com/api/character/avatar/1.jpeg"
+import styles from './card.module.css'
+
+const rick = "https://rickandmortyapi.com/api/character/avatar/1.jpeg"
 
 function onClick(side) {
     return () => console.log(side)

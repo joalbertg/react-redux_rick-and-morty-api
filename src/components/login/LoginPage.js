@@ -2,9 +2,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import { doGoogleLoginAction, logOutAction } from '../../redux/ducks';
+
 import styles from './login.module.css'
 
-function LoginPage({ loggedIn, fetching, doGoogleLoginAction, logOutAction }) {
+const LoginPage = ({ loggedIn, fetching, doGoogleLoginAction, logOutAction }) => {
   const doLogin = () => {
     doGoogleLoginAction()
   }
@@ -13,7 +14,7 @@ function LoginPage({ loggedIn, fetching, doGoogleLoginAction, logOutAction }) {
     logOutAction()
   }
 
-  if (fetching) return <h2>Loading...</h2>
+  if (fetching) return <h2 style={{textAlign:"center"}}>Loading...</h2>
   return (
     <div className={styles.container}>
     { !loggedIn ? 

@@ -8,8 +8,9 @@
 
 .container button{
     padding: 20px 50px;
-    border: none;
-    margin:20px 0px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
     border-radius: 5px;
     background-color: transparent;
     color:orangered;

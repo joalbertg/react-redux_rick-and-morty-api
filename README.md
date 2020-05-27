@@ -1,81 +1,109 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Rick and Morty API
 
-## Available Scripts
+* [ducks-modular-redux][ducks_modular_redux]
+* [redux][redux]
+* [react-redux][react_redux]
+* [redux-thunk][redux_thunk]
+* [redux-devtools][redux_devtools]
+* [firebase][firebase]
+* [react-apollo][react_apollo]
+* [apollo-boost][apollo_boost]
+* [graphql][graphql]
 
-In the project directory, you can run:
+[ducks_modular_redux]: https://github.com/erikras/ducks-modular-redux
+[redux]: https://redux.js.org/
+[react_redux]: https://react-redux.js.org/
+[redux_thunk]: https://github.com/reduxjs/redux-thunk
+[redux_devtools]: https://github.com/reduxjs/redux-devtools
+[firebase]: https://www.npmjs.com/package/firebase
+[react_apollo]: https://github.com/apollographql/react-apollo
+[apollo_boost]: https://www.npmjs.com/package/apollo-boost
+[graphql]: https://www.npmjs.com/package/graphql
 
-### `yarn start`
+## Structure
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+> run `tree -I "node_modules|public|screenshots|*.css"`
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+```shell
+.
+├── Dockerfile
+├── README.md
+├── docker-compose.yml
+├── package.json
+├── src
+│   ├── App.js
+│   ├── App.test.js
+│   ├── Routes.js
+│   ├── components
+│   │   ├── card
+│   │   │   └── Card.js
+│   │   ├── favs
+│   │   │   └── FavPage.js
+│   │   ├── home
+│   │   │   └── HomePage.js
+│   │   └── login
+│   │       └── LoginPage.js
+│   ├── firebase.js
+│   ├── helpers
+│   │   ├── index.js
+│   │   └── save_storage.helper.js
+│   ├── index.js
+│   ├── logo.svg
+│   ├── redux
+│   │   ├── ducks
+│   │   │   ├── charsDuck.js
+│   │   │   ├── index.js
+│   │   │   └── userDuck.js
+│   │   ├── index.js
+│   │   └── store.js
+│   ├── serviceWorker.js
+│   └── setupTests.js
+└── yarn.lock
 
-### `yarn test`
-
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `yarn build`
-
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+9 directories, 24 files
+```
 
 ## Install
 
 ```shell
 docker-compose run app yarn add redux react-redux redux-thunk redux-devtools
-docker-compose run app firebase
+docker-compose run app yarn add firebase
 docker-compose run app yarn add react-apollo apollo-boost graphql
 ```
 
-* [ducks-modular-redux][ducks_modular_redux]
+## Run Proyect
 
-[ducks_modular_redux]: https://github.com/erikras/ducks-modular-redux
+```shell
+docker-compose up
+```
+
+## Screenshots
+
+### Signin
+<p align="center">
+  <kbd>
+    <img src="screenshots/login-signin.png" title="signin"  width="400px" height="auto">
+  </kbd>
+</p>
+
+### Signout
+<p align="center">
+  <kbd>
+    <img src="screenshots/login-signout.png" title="signout"  width="400px" height="auto">
+  </kbd>
+</p>
+
+### Home
+<p align="center">
+  <kbd>
+    <img src="screenshots/home.png" title="home"  width="400px" height="auto">
+  </kbd>
+</p>
+
+### Home with events
+<p align="center">
+  <kbd>
+    <img src="screenshots/home-event.png" title="home with event"  width="400px" height="auto">
+  </kbd>
+</p>
 

@@ -1,6 +1,6 @@
 import React from 'react';
-import { Switch, Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { Switch, Route, Redirect } from 'react-router-dom';
 
 import Home from './components/home/HomePage';
 import FavPage from './components/favs/FavPage';

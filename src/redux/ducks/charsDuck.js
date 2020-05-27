@@ -129,7 +129,6 @@ export const getCharactersAction = () => (dispatch, getState) => {
   });
 }
 
-
 export const removeCharacterAction = () => (dispatch, getState) => {
   dispatch({
     type: GET_CHARACTERS

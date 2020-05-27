@@ -1,8 +1,9 @@
 import React from 'react';
-
 import { connect } from 'react-redux';
-import styles from './favs.module.css';
+
 import Card from '../card/Card';
+
+import styles from './favs.module.css';
 
 const FavPage = ({ characters = [0] }) => {
   const renderCharacter = (char, i) => (
